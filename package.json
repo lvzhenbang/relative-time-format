@@ -1,0 +1,37 @@
+{
+  "name": "relative-time-format",
+  "version": "1.0.0",
+  "description": "a plugin of RelativeTimeFormat",
+  "main": "dist/countdown.min.js",
+  "repository": "https://github.com/lvzhenbang/relative-time-format.git",
+  "author": "lvzhenbang <lvzhenbang@outlook.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack-dev-server --env=development",
+    "build": "webpack --env=production",
+    "db": "webpack --env=development && webpack --env=production",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "deploy": "git push && git checkout -b gh-pages && git push origin gh-pages:gh-pages && git checkout master && git branch -D gh-pages"
+  },
+  "homepage": "https://lvzhenbang.github.io/relative-time-format/",
+  "dependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-modules-umd": "^7.2.0",
+    "@babel/preset-env": "^7.5.4",
+    "babel-eslint": "^10.0.2",
+    "babel-loader": "^8.0.6",
+    "core-js": "^3.1.4",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.2",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
