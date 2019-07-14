@@ -71,7 +71,7 @@ class RelativeTime {
 
 if (inBrowser) {
   window.console.log('plugin is running browser.');
-  window.Relative = RelativeTime;
+  window.RelativeTIime = RelativeTime;
 }
 
 export default RelativeTime;

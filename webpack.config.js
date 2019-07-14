@@ -7,7 +7,7 @@ module.exports = (mode) => {
     mode,
     entry: './src/index.js',
     output: {
-      filename: isDev ? 'countdown.js' : 'countdown.min.js',
+      filename: isDev ? 'relativetime.js' : 'relativetime.min.js',
       path: path.join(__dirname, 'dist'),
       libraryTarget: 'umd',
       umdNamedDefine: true,
