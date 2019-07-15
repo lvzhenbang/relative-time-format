@@ -1,4 +1,4 @@
-import langMap from './config/lang';
+import langMap from '../config/lang';
 
 class CustomRelativeTimeFormat {
   consturctor(lang) {

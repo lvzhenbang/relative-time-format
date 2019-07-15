@@ -1,5 +1,5 @@
-import langMap from './config/lang';
-import CustomRelativeTimeFormat from './customRelativeTimeFormat';
+import langMap from '../../config/lang';
+import CustomRelativeTimeFormat from '../customRelativeTimeFormat';
 
 describe('custom relativeTimeFormat', () => {
   let crtfZh = new CustomRelativeTimeFormat('zh');
