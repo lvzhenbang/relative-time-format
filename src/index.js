@@ -1,5 +1,5 @@
-import defaults from './config/defaults';
-import version from './config/version';
+import defaults from '../config/defaults';
+import version from '../config/version';
 
 import parseDate from './utils/parseDate';
 import CustomRelativeTimeFormat from './customRelativeTimeFormat';
@@ -11,26 +11,30 @@ class RelativeTime {
       ...defaults,
       ...opt,
     };
+    this.inputDate = null;
+    this.output = '时间都去哪儿了';
+    this.relativeTimeFomatObj = null;
+    this.init();
+    this.name = 'relative time';
   }
 
   init() {
     this.version = version;
-  }
 
-  output() {
+    if ('Intl' in window && 'RelativeTimeFormat' in window.Intl) {
+      this.relativeTimeFomatObj = new Intl.RelativeTimeFormat(this.options.lang, { numeric: 'auto' });
+    } else {
+      this.relativeTimeFomatObj = new CustomRelativeTimeFormat(this.options.lang);
+    }
+
     const relativeTimeMs = this.timeUntil();
-    return this.timeUntilFromMs(relativeTimeMs);
+    this.output = this.timeUntilFromMs(relativeTimeMs)  || this.output;
   }
 
   formatTime(value, unit) {
-    let relativeTimeFomatObj = null;
-    if ('Intl' in window && 'RelativeTimeFormat' in window.Intl) {
-      relativeTimeFomatObj = new Intl.RelativeTimeFormat(this.options.lang, { numeric: 'auto' });
-    } else {
-      relativeTimeFomatObj = new CustomRelativeTimeFormat(this.options.lang);
+    if (this.relativeTimeFomatObj) {
+      return this.relativeTimeFomatObj.format(value, unit);
     }
-
-    return relativeTimeFomatObj.format(value, unit);
   }
 
   timeUntilFromMs(ms) {
@@ -40,12 +44,9 @@ class RelativeTime {
     const days = Math.round(hours / 24);
     const months = Math.round(days / 30);
     const years = Math.round(months / 12);
-
     let ouputTimeStr = 'invalid date';
     if (months >= 12) {
       ouputTimeStr = this.formatTime(years, 'year');
-    } else if (Math.abs(days) >= 45) {
-      ouputTimeStr = this.formatTime(months, 'month');
     } else if (Math.abs(days) >= 30) {
       ouputTimeStr = this.formatTime(months, 'month');
     } else if (Math.abs(hours) >= 24) {
@@ -64,8 +65,8 @@ class RelativeTime {
   }
 
   timeUntil() {
-    const date = parseDate(this.options.date);
-    return date.getTime() - Date.now();
+    this.inputDate = parseDate(this.options.date);
+    return this.inputDate.getTime() - Date.now();
   }
 }
 

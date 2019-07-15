@@ -12,6 +12,16 @@ describe('custom relativeTimeFormat', () => {
   crtfDefault.local = 'en';
   crtfDefault.localData = langMap['en'];
 
+  // init
+  it('init', () => {
+    expect(crtfDefault.local).toBe('en');
+    expect(crtfDefault.name).toBe('Custom.RelativeTimeFormat');
+  });
+
+  /**
+   * year
+   */
+
   // default
   it('default: format(1, "year") is "in 1 year"', () => {
     expect(crtfDefault.format(1, 'year')).toEqual('next year');
@@ -28,7 +38,9 @@ describe('custom relativeTimeFormat', () => {
   it('default: format(-2, "year") is "2 years ago"', () => {
     expect(crtfDefault.format(-2, 'year')).toEqual('2 years ago');
   });
-
+  /**
+   * day
+   */
   // zh
   it('zh: format(-2, "day") is "前天"', () => {
     expect(crtfZh.format(-2, 'day')).toEqual('前天');
@@ -51,23 +63,67 @@ describe('custom relativeTimeFormat', () => {
   });
 
   // en
-  it('zh: format(-2, "day") is "2 days ago"', () => {
+  it('en: format(-2, "day") is "2 days ago"', () => {
     expect(crtfEn.format(-2, 'day')).toEqual('2 days ago');
   });
 
-  it('zh: format(-1, "day") is "yesterday"', () => {
+  it('en: format(-1, "day") is "yesterday"', () => {
     expect(crtfEn.format(-1, 'day')).toEqual('yesterday');
   });
 
-  it('zh: format(0, "day") is "today"', () => {
+  it('en: format(0, "day") is "today"', () => {
     expect(crtfEn.format(0, 'day')).toEqual('today');
   });
 
-  it('zh: format(1, "day") is "tomorrow"', () => {
+  it('en: format(1, "day") is "tomorrow"', () => {
     expect(crtfEn.format(1, 'day')).toEqual('tomorrow');
   });
 
-  it('zh: format(2, "day") is "in 2 days"', () => {
+  it('en: format(2, "day") is "in 2 days"', () => {
     expect(crtfEn.format(2, 'day')).toEqual('in 2 days');
+  });
+
+  /**
+   * month
+   */
+  it('en: format(2, "month") is "in 2 months"', () => {
+    expect(crtfEn.format(2, 'month')).toEqual('in 2 months');
+  });
+
+  /**
+   * hour
+   */
+  it('en: format(2, "hour") is "in 2 hours"', () => {
+    expect(crtfEn.format(2, 'hour')).toEqual('in 2 hours');
+  });
+  
+  it('en: format(1, "hour") is "this hour"', () => {
+    expect(crtfEn.format(0, 'hour')).toEqual('in 1 hour');
+  });
+
+  it('en: format(0, "hour") is "this hour"', () => {
+    expect(crtfEn.format(0, 'hour')).toEqual('this hour');
+  });
+
+  it('en: format(-1, "hour") is "1 hour ago"', () => {
+    expect(crtfEn.format(-1, 'hour')).toEqual('1 hour ago');
+  });
+
+  it('en: format(-2, "hour") is "2 hours ago"', () => {
+    expect(crtfEn.format(-2, 'hour')).toEqual('2 hours ago');
+  });
+
+  /**
+   * mintue
+   */
+  it('en: format(2, "minute") is "in 2 minute"', () => {
+    expect(crtfEn.format(2, 'minute')).toEqual('in 2 minute');
+  });
+
+  /**
+   * second
+   */
+  it('en: format(2, "day") is "in 2 days"', () => {
+    expect(crtfEn.format(2, 'month')).toEqual('in 2 months');
   });
 });

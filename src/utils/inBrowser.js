@@ -1,2 +1,2 @@
-export default inBrowser = typeof window !== 'undefined';
-
+const inBrowser = typeof window !== 'undefined';
+export default inBrowser;

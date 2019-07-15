@@ -2,12 +2,8 @@ import langMap from '../config/lang';
 
 class CustomRelativeTimeFormat {
   consturctor(lang) {
-    this.local = langMap[lang] ? lang : 'en';
+    this.local =  lang || 'en';
     this.localData = langMap[this.local];
-    this.init();
-  }
-
-  init() {
     this.name = 'Custom.RelativeTimeFormat';
   }
 
