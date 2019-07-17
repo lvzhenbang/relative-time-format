@@ -7,7 +7,7 @@ describe('Class RelativeTime call calss CustomRelativeTimeFormat', () => {
 
   it('relativeTime instance version', () => {
     const relativeTime = new RelativeTime();
-    expect(relativeTime.version).toBe('1.0.0');
+    expect(relativeTime.version).toBe('1.2.0');
   });
 
   // 'last year'
