@@ -13,8 +13,7 @@ export default function parseDate(inputTime) {
       matchesArr[5] || 0,
       matchesArr[6] || 0,
       matchesArr[7] || 0,
-    )
-  } else {
-    return new Date(NaN);
+    );
   }
+  return new Date(NaN);
 }
