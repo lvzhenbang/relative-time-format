@@ -36,7 +36,9 @@ const langMap = {
       future: 'in {0} days',
     },
     hour: {
+      previous: '{0} hour ago',
       current: 'this hour',
+      next: 'in {0} hour',
       past: '{0} hours ago',
       future: 'in {0} hours',
     },
