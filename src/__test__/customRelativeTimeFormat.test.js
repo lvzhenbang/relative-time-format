@@ -1,16 +1,9 @@
-import langMap from '../../config/lang';
 import CustomRelativeTimeFormat from '../customRelativeTimeFormat';
 
 describe('custom relativeTimeFormat', () => {
-  let crtfZh = new CustomRelativeTimeFormat('zh');
-  crtfZh.local = 'zh';
-  crtfZh.localData = langMap['zh'];
-  let crtfEn = new CustomRelativeTimeFormat('en');
-  crtfEn.local = 'en';
-  crtfEn.localData = langMap['en'];
-  let crtfDefault = new CustomRelativeTimeFormat();
-  crtfDefault.local = 'en';
-  crtfDefault.localData = langMap['en'];
+  const crtfDefault = new CustomRelativeTimeFormat();
+  const crtfZh = new CustomRelativeTimeFormat('zh');
+  const crtfEn = new CustomRelativeTimeFormat('en');
 
   // init
   it('init', () => {
@@ -96,9 +89,9 @@ describe('custom relativeTimeFormat', () => {
   it('en: format(2, "hour") is "in 2 hours"', () => {
     expect(crtfEn.format(2, 'hour')).toEqual('in 2 hours');
   });
-  
-  it('en: format(1, "hour") is "this hour"', () => {
-    expect(crtfEn.format(0, 'hour')).toEqual('in 1 hour');
+
+  it('en: format(1, "hour") is "in 1 hour"', () => {
+    expect(crtfEn.format(1, 'hour')).toEqual('in 1 hour');
   });
 
   it('en: format(0, "hour") is "this hour"', () => {
@@ -117,7 +110,7 @@ describe('custom relativeTimeFormat', () => {
    * mintue
    */
   it('en: format(2, "minute") is "in 2 minute"', () => {
-    expect(crtfEn.format(2, 'minute')).toEqual('in 2 minute');
+    expect(crtfEn.format(2, 'minute')).toEqual('in 2 minutes');
   });
 
   /**
