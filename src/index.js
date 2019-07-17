@@ -11,7 +11,6 @@ class RelativeTime {
       ...defaults,
       ...opt,
     };
-    this.inputDate = null;
     this.output = '时间都去哪儿了';
     this.relativeTimeFomatObj = null;
     this.init();
@@ -22,7 +21,9 @@ class RelativeTime {
     this.version = version;
 
     const relativeTimeMs = this.timeUntil();
-    this.output = this.timeUntilFromMs(relativeTimeMs) || this.output;
+    if (relativeTimeMs) {
+      this.output = this.timeUntilFromMs(relativeTimeMs);
+    }
   }
 
   formatTime(value, unit) {
@@ -43,7 +44,7 @@ class RelativeTime {
     const months = Math.round(days / 30);
     const years = Math.round(months / 12);
     let ouputTimeStr = 'invalid date';
-    if (months >= 12) {
+    if (Math.abs(months) >= 12) {
       ouputTimeStr = this.formatTime(years, 'year');
     } else if (Math.abs(days) >= 30) {
       ouputTimeStr = this.formatTime(months, 'month');
@@ -63,8 +64,12 @@ class RelativeTime {
   }
 
   timeUntil() {
-    this.inputDate = parseDate(this.options.date);
-    return this.inputDate.getTime() - Date.now();
+    const inputDate = parseDate(this.options.date);
+    if (inputDate) {
+      return inputDate - Date.now();
+    }
+
+    return false;
   }
 }
 
