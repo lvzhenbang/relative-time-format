@@ -1,91 +1,85 @@
 import RelativeTime from '../index';
-import CustomRelativeTimeFormat from '../customRelativeTimeFormat';
 
 // Each test requires time to modify the test according to local-time
-const mockFormat = jest.fn();
-jest.mock('../customRelativeTimeFormat', () => {
-  return jest.fn().mockImplementation( () => {
-    return { format: mockFormat }
-  });
-});
-
-beforeEach(() => {
-  CustomRelativeTimeFormat.mockClear();
-  mockFormat.mockClear();
-});
 
 describe('Class RelativeTime call calss CustomRelativeTimeFormat', () => {
   /* relativeTime */
-  // relativeTime instance without paramater
-  it('relativeTime instance no-params', () => {
-    let relativeTime = new RelativeTime();
-    expect(relativeTime).toBeTruthy();
-    expect(CustomRelativeTimeFormat).toHaveBeenCalledTimes(1);
-  });
 
   it('relativeTime instance version', () => {
-    let relativeTime = new RelativeTime();
+    const relativeTime = new RelativeTime();
     expect(relativeTime.version).toBe('1.0.0');
   });
 
-  it('relativeTime instance default-inputDate', () => {
-    let relativeTime = new RelativeTime();
-    const date = new Date(2019, 6, 14, 10, 30, 30, 0);
-    expect(relativeTime.inputDate).toEqual(date);
+  // 'last year'
+  it('index last year', () => {
+    const relativeTime = new RelativeTime({
+      lang: 'en',
+      date: Date.now() - 365 * 24 * 60 * 60 * 1000,
+    });
+    expect(relativeTime.output).toEqual('last year');
   });
 
-  /* CustomRelativeTimeFormat */
-  // year 2020-7-14
-  it('check relativeTime instance pass to CustomRelativeTimeFormat params', () => {
-    let relativeTime = new RelativeTime({
+  // '1 month ago'
+  it('index 1 month ago', () => {
+    const relativeTime = new RelativeTime({
       lang: 'en',
-      date: '2020-7-14 1:26:0'
+      date: Date.now() + 30 * 24 * 60 * 60 * 1000,
     });
-    expect(mockFormat.mock.calls[0]).toEqual([1, 'year']);
+    expect(relativeTime.output).toEqual('next month');
   });
 
-  // month 2020-7-14
-  it('check relativeTime instance pass to CustomRelativeTimeFormat params', () => {
-    let relativeTime = new RelativeTime({
+  // in 2 days
+  it('index in 2 days', () => {
+    const relativeTime = new RelativeTime({
       lang: 'en',
-      date: '2019-8-19 1:26:0'
+      date: Date.now() + 2 * 24 * 60 * 60 * 1000,
     });
-    expect(mockFormat.mock.calls[0]).toEqual([1, 'month']);
+    expect(relativeTime.output).toEqual('in 2 days');
   });
 
-  // in 2 days 2019-7-18
-  it('check relativeTime instance pass to CustomRelativeTimeFormat params', () => {
-    let relativeTime = new RelativeTime({
+  // '2 hours ago'
+  it('index 2 hours ago', () => {
+    const relativeTime = new RelativeTime({
       lang: 'en',
-      date: '2019-7-18 1:26:0'
+      date: Date.now() - 2 * 60 * 60 * 1000,
     });
-    expect(mockFormat.mock.calls[0]).toEqual([2, 'day']);
+    expect(relativeTime.output).toEqual('2 hours ago');
   });
 
-  // hour  2019-7-16
-  it('check relativeTime instance pass to CustomRelativeTimeFormat params', () => {
-    let relativeTime = new RelativeTime({
+
+  // '2 minutes ago'
+  it('index 2 minutes ago', () => {
+    const relativeTime = new RelativeTime({
       lang: 'en',
-      date: '2019-7-16 0:26:0'
+      date: Date.now() - 2 * 60 * 1000,
     });
-    expect(mockFormat.mock.calls[0]).toEqual([-1, 'hour']);
+    expect(relativeTime.output).toEqual('2 minutes ago');
   });
 
-  // hour  2019-7-16
-  it('check relativeTime instance pass to CustomRelativeTimeFormat params', () => {
-    let relativeTime = new RelativeTime({
+  // '10 second ago'
+  it('index 10 second ago', () => {
+    const relativeTime = new RelativeTime({
       lang: 'en',
-      date: '2019-7-16 2:30:0'
+      date: Date.now() - 10 * 1000,
     });
-    expect(mockFormat.mock.calls[0]).toEqual([1, 'hour']);
+    expect(relativeTime.output).toEqual('10 seconds ago');
   });
 
-  // minute  2019-7-16
-  it('check relativeTime instance pass to CustomRelativeTimeFormat params', () => {
-    let relativeTime = new RelativeTime({
+  // 'now'
+  it('index now', () => {
+    const relativeTime = new RelativeTime({
       lang: 'en',
-      date: '2019-7-16 1:44:0'
+      date: Date.now() - 9 * 1000,
     });
-    expect(mockFormat.mock.calls[0]).toEqual([1, 'minute']);
+    expect(relativeTime.output).toEqual('now');
+  });
+
+  // 'ivalid date'
+  it('index now', () => {
+    const relativeTime = new RelativeTime({
+      lang: 'en',
+      date: new Date(NaN),
+    });
+    expect(relativeTime.output).toBe('时间都去哪儿了');
   });
 });
