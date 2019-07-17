@@ -21,20 +21,18 @@ class RelativeTime {
   init() {
     this.version = version;
 
+    const relativeTimeMs = this.timeUntil();
+    this.output = this.timeUntilFromMs(relativeTimeMs) || this.output;
+  }
+
+  formatTime(value, unit) {
     if ('Intl' in window && 'RelativeTimeFormat' in window.Intl) {
       this.relativeTimeFomatObj = new Intl.RelativeTimeFormat(this.options.lang, { numeric: 'auto' });
     } else {
       this.relativeTimeFomatObj = new CustomRelativeTimeFormat(this.options.lang);
     }
 
-    const relativeTimeMs = this.timeUntil();
-    this.output = this.timeUntilFromMs(relativeTimeMs)  || this.output;
-  }
-
-  formatTime(value, unit) {
-    if (this.relativeTimeFomatObj) {
-      return this.relativeTimeFomatObj.format(value, unit);
-    }
+    return this.relativeTimeFomatObj.format(value, unit);
   }
 
   timeUntilFromMs(ms) {
