@@ -13,13 +13,13 @@
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "deploy": "git push && git checkout -b gh-pages && git push origin gh-pages:gh-pages && git checkout master && git branch -D gh-pages"
   },
   "homepage": "https://lvzhenbang.github.io/relative-time-format/",
   "dependencies": {
     "@babel/cli": "^7.5.0",
     "@babel/core": "^7.5.4",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-modules-umd": "^7.2.0",
     "@babel/preset-env": "^7.5.4",
     "babel-eslint": "^10.0.2",
@@ -29,6 +29,7 @@
     "eslint": "^6.0.1",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jest": "^22.9.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.2",
     "html-webpack-plugin": "^3.2.0",
