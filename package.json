@@ -1,8 +1,8 @@
 {
-  "name": "relative-time-format",
-  "version": "1.0.0",
+  "name": "lzb-relative-time-format",
+  "version": "1.2.1",
   "description": "a plugin of RelativeTimeFormat",
-  "main": "dist/countdown.min.js",
+  "main": "dist/relativetime.min.js",
   "repository": "https://github.com/lvzhenbang/relative-time-format.git",
   "author": "lvzhenbang <lvzhenbang@outlook.com>",
   "license": "MIT",
