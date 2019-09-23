@@ -23,6 +23,7 @@ module.exports = (mode) => {
     plugins: [
       new HtmlWebpackPlugin({
         title: 'relative time',
+        tempalte: path.join(__dirname, './tpl/index.html'),
       }),
     ],
     devtool: isDev ? 'cheap-module-eval-source-map' : 'cheap-module-source-map',
